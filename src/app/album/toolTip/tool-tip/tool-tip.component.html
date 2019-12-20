@@ -1,0 +1,30 @@
+<div class = "container" [class.transition]="options.class"
+  [ngStyle]="{ 'margin': 'auto','top.px': options.y, 'left.px': options.x, 'width.px': options.width}">
+  <!-- pointer -->
+  <div class="outer" *ngIf = "!options.class">
+    <div [ngStyle]="{'left.px': options.pointerX}" class="inner">
+    </div>
+  </div>
+  <!-- end pointer -->
+  <div class="message" id ="smth" >
+    <br>
+    <table class="m-1">
+      <tr>
+        <td class="m-1 p-1">Created</td>
+        <td class="m-1 p-1">{{photoInfo['creationDate']}}</td>
+      </tr> 
+      <tr>
+        <td class="m-1 p-1">Description</td>
+        <td class="m-1 p-1">{{photoInfo['description']}}</td>
+      </tr>
+      <tr>
+          <td class="m-1 p-1">Title</td>
+          <td class="m-1 p-1">{{photoInfo['filename']}}</td>
+        </tr>
+    </table>
+  </div>
+  <div class="outer bottom" *ngIf ="options.class" style="margin-top: -0.5em">
+    <div [ngStyle]="{'left.px': options.pointerX}" class="inner">
+    </div>
+  </div>
+</div>

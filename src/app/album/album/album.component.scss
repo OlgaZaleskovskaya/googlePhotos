@@ -1,0 +1,28 @@
+
+div.container {        
+    h1{
+    color: red;
+  
+    }
+    div.photos{
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap; 
+        height: auto; 
+        position: relative;
+      
+        div.photo{
+            width: 200px;
+            margin: 0.5em;
+            border: 2px solid rgb(214, 214, 214);  
+             img{
+                width: 95%;
+                display: block;
+                margin: auto; 
+            }
+        }
+        div.selected{
+            border: 2px solid rgb(11, 59, 104);  
+        }
+    }
+}

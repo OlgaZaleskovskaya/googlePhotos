@@ -1,0 +1,19 @@
+<div class="container">
+    <i class="material-icons orange600">face</i>
+  <mat-tab-group dynamicHeight (selectedTabChange)="myMethod($event)">
+    <mat-tab label="Albums">
+      <div class="example-small-box mat-elevation-z4">
+        <p>My Albums</p>
+        <div class="container">
+
+          <router-outlet></router-outlet>
+        </div>
+      </div>
+    </mat-tab>
+    <mat-tab label="Edit Album" (selectedTabChange)="myMethod($event)">
+      <div class="example-small-box mat-elevation-z4">
+          <router-outlet name="editAlbum"></router-outlet>
+      </div>
+    </mat-tab>
+  </mat-tab-group>
+</div>

@@ -1,1 +1,30 @@
 /* You can add global styles to this file, and also import other style files */
+@import "scss/custom";
+//Here we importing _custom.scss file but we don't need to include underscore.
+//$theme:   mat-light-theme($primary,$accent,$warn);
+//@include angular-material-theme($theme);
+@import "src/my-theme";
+
+@mixin boxShadow($left, $top, $radius, $color) {
+	box-shadow: $left $top $radius $color;
+	-webkit-box-shadow: $left $top $radius $color;
+	-moz-box-shadow: $left $top $radius $color;
+};
+
+@mixin borderRadius($radius) {
+	border-radius: $radius;
+	-webkit-border-radius: $radius;
+	-moz-border-radius: $radius;
+};
+
+
+
+	snack-bar-container.success {
+		background-color: green !important;
+		color: white
+	}
+	
+	snack-bar-container.notification simple-snack-bar {
+		background-color: red !important;
+		color: white;
+	}

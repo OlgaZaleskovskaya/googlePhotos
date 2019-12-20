@@ -1,0 +1,63 @@
+@import "../../../../styles.scss";
+.container{
+    position: absolute;
+    height: auto;
+  // background: rgb(212, 86, 55);
+        div.outer{
+            width: auto;
+            height: 1em;
+            background: honeydew;
+            div.inner{
+                height: 1em;
+                width: 1em;
+                transform: rotate(45deg);
+                position:relative;
+                top:3px;
+                background: rgb(11, 59, 104);
+            }
+        }
+        .message{
+            position: relative;
+            top:-0.5em;
+            background: rgb(11, 59, 104);
+            color: white;
+            z-index: 2; 
+            font-size: 0.8em;
+           font-weight: 100;
+           @include boxShadow(2px, 2px, 2px, black);
+           @include borderRadius(5px);
+           padding:1em;
+        
+           height: auto;
+            table{
+                width: 100%;
+                border: 1px solid grey;
+                border-collapse: collapse;
+                tr{
+                    td{
+                        font-size: 0.8em;
+                        font-weight: 100;
+                        padding: 0.5em 2em;
+                        border: 1px solid grey;
+                        vertical-align: top;
+                    }
+                    td:first-child{
+                        width: 20%;
+                    }
+                }
+            }
+        }
+       
+      
+ }    
+ div.transition{
+    transform: translateY(-100%);
+    div.outer{
+       div.inner {
+           margin-top:-1em;
+       }
+    }
+    div.message{
+        @include boxShadow(0px, 0px, 0px, black);
+    }
+}

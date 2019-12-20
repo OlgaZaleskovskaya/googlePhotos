@@ -1,0 +1,49 @@
+@import '../../../styles.scss';
+div.main{
+    width: 100%;
+    margin: 2em auto;
+    font-size: 0.8em;
+    color: grey;
+}
+div.btn-group{
+    button{
+        margin:5px;
+    }
+}
+
+mat-grid-tile > ::ng-deep figure {
+    justify-content: flex-start !important;
+} 
+
+mat-grid-tile:nth-child(3) > ::ng-deep figure {
+    width: 100%;
+} 
+
+.uploadfilecontainer{
+   // width: 95%;
+    height: 200px;
+    background: lightcyan;
+    border: 1px gray dashed;
+}
+button.createAlbum{
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+mat-grid-tile.files-list::ng-deep figure{
+    align-items: flex-start;
+    font-size: 0.7em;
+    div{
+        width:100%;
+        p{
+           background: greenyellow;
+           position: relative;
+         span:last-child{
+             position: absolute;
+             right: 0;
+         }
+        }
+    }
+
+}
+

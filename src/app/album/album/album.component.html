@@ -1,0 +1,13 @@
+<div class="container">
+    <h1>Album {{name}}</h1>
+    <div class="photos">
+        <div class="photo" appToolTip [photoInfo]="photo" *ngFor="let photo of photoList | filter:startIndex:endIndex">
+            <img src={{photo.baseUrl}} alt="Photo of a Smth" (click) = "selectPhoto(photo)">
+    
+        </div>
+       
+    </div>
+    <mat-paginator [length]="length" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions"
+        (page)="onPageChange($event)">
+    </mat-paginator>
+</div>

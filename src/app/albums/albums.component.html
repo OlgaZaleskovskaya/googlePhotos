@@ -1,0 +1,17 @@
+
+<div class="albums">
+    <mat-card class="example-card" *ngFor="let album of albumsList">
+      <mat-card-header>
+        <mat-card-title>{{album.title}}</mat-card-title>
+      </mat-card-header>
+     <img mat-card-image src={{album.coverPhotoBaseUrl}} alt="Photo of a Shiba Inu"> 
+      <mat-card-content>
+        <p> <span>{{album.mediaItemsCount}}</span><span *ngIf = "!album.mediaItemsCount">No</span>
+          photo<span *ngIf = "album.mediaItemsCount > 1">s</span>
+        </p>
+      </mat-card-content>
+      <mat-card-actions>
+          <button type="button" [disabled] ="!album.mediaItemsCount" mat-button (click)="selectAlbum(album.id, album.title)">Get Photos</button>
+      </mat-card-actions>.
+    </mat-card>
+  </div>
