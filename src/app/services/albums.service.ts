@@ -15,9 +15,9 @@ export class AlbumsService {
     albums = new Subject<Array<IAlbum>>();
     albumContent = new Subject<Array<IPhoto>>();
     initialPhotoSize = [500, 500];
-   // loadedImageSbj = new Subject<string>();
+    // loadedImageSbj = new Subject<string>();
     subjOnCreateAbum = new Subject<string>();
-    subjOnUploadImgs =  new Subject<string>();
+    subjOnUploadImgs = new Subject<string>();
 
     constructor(private http: HttpService, public datepipe: DatePipe) {
 
@@ -64,7 +64,7 @@ export class AlbumsService {
 
     createPhotoObject(obj: Object, size: IPhotoSize): IPhoto {
         let photo = {} as IPhoto;
-        photo.id = obj['id'];    
+        photo.id = obj['id'];
         photo.filename = obj['filename'];
         photo.width = obj['mediaMetadata']['width'];
         photo.height = obj['mediaMetadata']['height'];
@@ -83,10 +83,11 @@ export class AlbumsService {
 
 
     addFiles(files: IImgObject[], albId: string) {
-        console.log('albumService, addFiles', albId);
-       this.http.addFiles(files, albId);
-     //  .subscribe(res => this.subjOnUploadImgs.next('success'), error => this.subjOnUploadImgs.next('error'));
-   ;
+    
+        setTimeout(() => this.subjOnUploadImgs.next('success'), 100000);
+        // this.http.addFiles(files, albId).subscribe(res => this.subjOnUploadImgs.next('success'), error => this.subjOnUploadImgs.next('error'));
+        ;
+
     }
 
 
@@ -109,6 +110,6 @@ export class AlbumsService {
 
     createAlbum(name: string): void {
         this.http.createAlbum(name)
-        .subscribe(res => this.subjOnCreateAbum.next('success'), error => this.subjOnCreateAbum.next('error'));
+            .subscribe(res => this.subjOnCreateAbum.next('success'), error => this.subjOnCreateAbum.next('error'));
     }
 }

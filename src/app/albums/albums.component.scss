@@ -2,6 +2,13 @@ div.albums{
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
+    .spinner{
+        width: 3em;
+        height: 3em;
+        margin: 3em auto;
+        opacity: 0.5;
+
+    }
 }
 .example-card{
     width: 200px;

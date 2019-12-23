@@ -20,6 +20,7 @@ export class EditImgComponent implements OnInit {
   constructor(public dialogRef: MatDialogRef<NewAlbumComponent>) { }
 
   ngOnInit() {
+    this.dialogRef.addPanelClass(['test']) ;
 
   }
 

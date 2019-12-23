@@ -1,19 +1,19 @@
 <div class = "container">  
         <mat-toolbar>
-            <span>New Album name</span>
+            <span>Image title</span>
             <span class="example-fill-remaining-space"></span>
             <button class = "mat-dialog-close" mat-stroked-button (click)="onClose()" tabindex="-1"><i class="material-icons md-dark">clear</i></button>
           </mat-toolbar>
     
         <form class="normal-form" [formGroup]="myForm" (ngSubmit)="onSubmit()">
             <mat-form-field>
-                    <mat-label>Name</mat-label>
+                    <mat-label>Title</mat-label>
                 <input matInput name="name" placeholder="Album Name*" formControlName="name">
                 <mat-error *ngIf="myForm.controls['name'].hasError('required')">
-                    Please enter album name
+                    Please enter title
                 </mat-error>
                 <mat-error *ngIf="myForm.controls['name'].hasError('minLength')">
-                  Should not be longer than 1 symbol
+                  Should not be shorter than 1 symbol
                 </mat-error>
             </mat-form-field>
             <mat-form-field >

@@ -5,7 +5,6 @@
         </i></button>
 
     <form #myAddImageForm="ngForm" (ngSubmit)="onAddImage(myAddImageForm)">
-
         <mat-grid-list cols="5" rowHeight="40px">
             <!--  select album -->
             <mat-grid-tile class="toLeft " [colspan]="3" [rowspan]="1">
@@ -23,7 +22,7 @@
             </mat-grid-tile>
             <!-- end select album -->
 
-            <mat-grid-tile [colspan]="2" [rowspan]="1" [style.background]="'orange'">
+            <mat-grid-tile [colspan]="2" [rowspan]="1" >
                 <p>Selected files:</p>
             </mat-grid-tile>
 
@@ -36,11 +35,9 @@
                                 <!-- 'just' select button-->
                                 <input type="file" accept = "image/*" (change)="onFileSelected($event)" name="myFile" class="form-control"
                                     id="name" style="display: none" #fileInput>
-
                                 <button type="button" mat-button color="primary"
                                     (click)="fileInput.click()"><span>Select
                                         files</span></button>
-
                             </div>
 
                             <!--  end'just' select button-->
@@ -49,7 +46,7 @@
                                 <!-- drag and drop img to  the album -->
                                 <div class="uploadfilecontainer " (click)="fileDrop.click()" appDnd
                                     (onFileDropped)="onDragFile($event)">
-                                    drag and drop files to the album
+                                    <span>  drag and drop files to the album</span>  
                                     <input hidden type="file" #fileDrop (change)="onDragFile($event)">
                                 </div>
                             </div><!-- end drag and drop img to  the album -->
@@ -75,72 +72,10 @@
             </mat-grid-tile>
 
         </mat-grid-list>
-        <div class="btn-group">
+        <div class="btn-group"    *ngIf = "imgList.length > 0">
             <button mat-raised-button color="primary" type="submit">Add</button>
             <button mat-raised-button color="warn" type="buttom">Clean</button></div>
 
     </form>
 </div>
 
-<!-- <div class="grid-container">
-   
-        <ng-container *ngIf="selectedAlbum">
-            <div @myAnimation class="item12">
-
-                <div class=" form-group ">
-                    <input type="file" (change)="onFileSelected($event)" name="myFile" class="form-control" id="name"
-                        style="display: none" #fileInput>
-                    <p role="button" (click)="fileInput.click()"><span>Attach file to
-                            {{selectedAlbum.title}} album</span></p>
-                    <p>OR</p>
-                </div>
-
-                <div class="item13">
-                    <div class="uploadfilecontainer " (click)="fileDrop.click()" appDnd
-                        (onFileDropped)="onDragFile($event)">
-                        drag and drop files to the album
-                        <input hidden type="file" #fileDrop (change)="onDragFile($event)">
-                    </div>
-
-                    <button mat-raised-button color="primary" type="button">Add files</button>
-                </div>
-            </div>
-        </ng-container> -->
-
-
-<!--   create new album -->
-
-
-
-<!-- <div class="item3 files-list ">
-        <p>Selected files:</p>
-        <p *ngFor="let img of imgList; let i= index" [class.isSelected]="i == currentImgIndex"><span
-                style="width: 70%;">{{ img.file.name }}</span><span><i (click)="onEditImg(i)"
-                    matTooltip="Add Description and Name" class="material-icons">
-                    create
-                </i> <i class="material-icons del" (click)="onDeleteAttachment(i)" matTooltip="Remove">
-                    remove_circle_outline
-                </i> </span>
-        </p>
-    </div> -->
-
-
-
-<!-- <ng-container *ngIf="addDescription">
-    <div @myAnimation class="addDescriptionForm">
-        <div class="wrapper"></div>
-        <form class="example-form" #addDetailsForm="ngForm" (ngSubmit)="addNameOrDescription(addDetailsForm)">
-            <mat-form-field class="example-full-width">
-                <input matInput name="name" placeholder="Add name" [(ngModel)]="currentImgObject.name">
-            </mat-form-field>
-            <br>
-            <mat-form-field class="example-full-width">
-                <textarea name="description" [(ngModel)]="currentImgObject.description" matInput maxlength="1000"
-                    placeholder="Add  description"></textarea>
-            </mat-form-field>
-            <br>
-            <button mat-raised-button color="primary" type="submit">Add</button>
-            <button mat-raised-button color="warn" type="reset">Add</button>
-        </form>
-    </div>
-</ng-container> -->

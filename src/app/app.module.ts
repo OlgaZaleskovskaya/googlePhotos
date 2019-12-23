@@ -5,7 +5,7 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import 'hammerjs';
 import { ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { MainComponent } from './main/main.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { AlbumsService } from './services/albums.service';
@@ -17,7 +17,9 @@ import { HttpService } from './services/http.service';
 import { EditAlbumModule } from './edit-album/edit-album.module';
 import { TempoComponent } from './tempo/tempo.component';
 import { MaterialModule } from './shared/material/material.module';
-import { TestComponent } from './test/test.component';
+
+import { SpinnerComponent } from './albums/spinner/spinner.component';
+import { InterceptorService } from './services/interceptor.service';
 
 
 
@@ -32,7 +34,7 @@ import { TestComponent } from './test/test.component';
     InitialComponent,
     AlbumsComponent,
     TempoComponent,
-    TestComponent,
+    SpinnerComponent,
    
    
   ],
@@ -45,7 +47,11 @@ import { TestComponent } from './test/test.component';
     MaterialModule,
     AppRoutingModule,
   ],
-  providers: [AlbumsService, AuthService, DatePipe, HttpService],
+  providers: [AlbumsService, AuthService, DatePipe, HttpService, {
+    provide: HTTP_INTERCEPTORS,
+    useClass: InterceptorService,
+    multi: true
+    }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

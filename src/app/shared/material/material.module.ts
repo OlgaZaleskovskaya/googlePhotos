@@ -21,7 +21,8 @@ import * as Material  from '@angular/material';
     Material.MatGridListModule,
     Material.MatDialogModule,
     Material.MatToolbarModule,
-    Material.MatSnackBarModule
+    Material.MatSnackBarModule,
+    Material.MatProgressSpinnerModule
 
   
   ],
@@ -39,7 +40,8 @@ import * as Material  from '@angular/material';
     Material.MatGridListModule,
     Material.MatDialogModule,
     Material.MatToolbarModule,
-    Material.MatSnackBarModule
+    Material.MatSnackBarModule,
+    Material.MatProgressSpinnerModule
    
   ]
 })

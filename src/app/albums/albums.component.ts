@@ -14,6 +14,8 @@ export class AlbumsComponent implements OnInit, OnDestroy {
  albums: Subject<Array<IAlbum>>;
   albumsList: Array<IAlbum>;
   subscription: Subscription;
+  
+  isLoading: boolean;
 
   constructor(private albumsService: AlbumsService,
     private router: Router,
@@ -21,9 +23,11 @@ export class AlbumsComponent implements OnInit, OnDestroy {
   }
  
   ngOnInit() {
+    this.isLoading = true;
     this.albumsList = this.albumsService.albumList;
     this.subscription = this.albumsService.albums
-      .subscribe(res => this.albumsList = res)
+      .subscribe(res => {this.albumsList = res;
+      this.isLoading = false})
   }
 
   ngOnDestroy(): void {

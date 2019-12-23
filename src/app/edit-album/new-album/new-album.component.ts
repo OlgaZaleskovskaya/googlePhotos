@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { FormGroup, FormControl, Validators, NgForm } from '@angular/forms';
 import { MatDialogRef } from '@angular/material';
 import { AlbumsService } from 'src/app/services/albums.service';
@@ -17,6 +17,7 @@ export class NewAlbumComponent implements OnInit {
   constructor(public dialogRef: MatDialogRef<NewAlbumComponent>, private albService: AlbumsService, private ns: NotificationService) { }
 
   ngOnInit() {
+  
     this.albService.subjOnCreateAbum.subscribe(res => {
       if (res === "success") {
         this.ns.success(":: Album is created");

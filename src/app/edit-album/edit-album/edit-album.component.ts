@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgForm, FormGroup } from '@angular/forms';
-import { MatDialog, MatDialogConfig } from '@angular/material';
+import { MatDialog, MatDialogConfig, MatDialogRef } from '@angular/material';
 import { AlbumsService } from 'src/app/services/albums.service';
 import { IAlbum, IImgObject } from 'src/app/shared/model';
 import { ComponentType } from '@angular/cdk/portal';
@@ -18,6 +18,7 @@ import { EditImgComponent } from '../edit-img/edit-img.component';
 import { NewAlbumComponent } from '../new-album/new-album.component';
 
 import { NotificationService } from 'src/app/services/notification.service';
+import { SpinnerComponent } from 'src/app/albums/spinner/spinner.component';
 
 
 @Component({
@@ -46,6 +47,7 @@ export class EditAlbumComponent<T> implements OnInit {
   imgList: IImgObject[];
 
 
+
   fileToUpload: File = null;
   body: any;
   albId: string;
@@ -65,6 +67,11 @@ export class EditAlbumComponent<T> implements OnInit {
     //       this.getCurrentData(res['url']);
     //     }
     //   });
+    this.albService.subjOnUploadImgs.subscribe(res => {
+      if (res == "success") {
+
+      }
+    })
   }
 
 
@@ -81,6 +88,8 @@ export class EditAlbumComponent<T> implements OnInit {
     this.albService.subjOnUploadImgs.subscribe(res => {
       if (res === "success") {
         this.ns.success(":: Images are upLoadeds");
+        this.dialog.closeAll();
+
       } else {
         this.ns.notification(":: An error has occurred")
 
@@ -109,13 +118,10 @@ export class EditAlbumComponent<T> implements OnInit {
       }
       this.imgList.push(imgObject)
     }
-    console.log( this.imgList);
   }
 
   onFileSelected(event) {
     const img = <File>event.target.files[0];
-    const tempo = this.validateFile(img);
-    console.log('boolean', tempo);
     if (this.validateFile(img)) {
       const imgObject = <IImgObject>{
         file: img,
@@ -135,8 +141,8 @@ export class EditAlbumComponent<T> implements OnInit {
 
   onAddImage(form: NgForm) {
     const id = this.selectedAlbum.id;
-
     this.albService.addFiles(this.imgList, id);
+    this.onSpinnerCreate(SpinnerComponent);
   }
 
   onEditImg(index: number) {
@@ -159,14 +165,27 @@ export class EditAlbumComponent<T> implements OnInit {
     this.onCreatePopUp(NewAlbumComponent, '60%');
   }
 
-  onCreatePopUp<T>(dialogComponent: ComponentType<T>, width: string) {
+  private onCreatePopUp<T>(dialogComponent: ComponentType<T>, width: string) {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
     dialogConfig.width = width.toString();
-    let matDialogRef = this.dialog.open(dialogComponent, dialogConfig);
+    var matDialogRef = this.dialog.open(dialogComponent, dialogConfig);
     matDialogRef.afterClosed().subscribe(res => this.addDetails(res));
 
+  }
+
+  private onSpinnerCreate<T>(dialogComponent: ComponentType<T>) {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = true;
+    dialogConfig.width = "100%";
+    dialogConfig.panelClass ='testClass' ;
+    let matDialogRef = this.dialog.open(dialogComponent, dialogConfig);
+    this.albService.subjOnUploadImgs.subscribe(res => {
+      if (res == "success") {
+        matDialogRef.close();
+      }
+    })
   }
 
   addDetails(res: string[] | any) {
