@@ -1,32 +1,27 @@
-<mat-form-field style = "font-size: 0.5rem; font-style: italic;">
-    <mat-label>Select your color theme</mat-label>
-    <mat-select [(ngModel)] = "currentTheme" small>
-      <mat-option *ngFor="let theme of themes; let i = index" [value]="theme">
-        {{theme}}
-      </mat-option>
-    </mat-select>
-  </mat-form-field>
- 
-
-<div class="container" [class]="currentTheme">
-   
-  <mat-tab-group dynamicHeight (selectedTabChange)="myMethod($event)">
-    <mat-tab label="Albums">
-      <div class="example-small-box mat-elevation-z4">
-        <p>My Albums</p>
-        <div class="container">
-
-          <router-outlet></router-outlet>
+<div [class]="currentTheme">
+  <div class="my-flex">
+    <mat-tab-group dynamicHeight (selectedTabChange)="myMethod($event)">
+      <mat-tab label="Albums">
+        <div class="example-small-box mat-elevation-z4" >
+          <p>My Albums</p>
+          <div class="container">
+            <router-outlet></router-outlet>
+          </div>
         </div>
-      </div>
-    </mat-tab>
-    <mat-tab label="Add images" (selectedTabChange)="myMethod($event)">
-      <div class="example-small-box mat-elevation-z4">
+      </mat-tab>
+      <mat-tab label="Add images" (selectedTabChange)="myMethod($event)">
+        <div class="example-small-box mat-elevation-z4">
           <router-outlet name="editAlbum"></router-outlet>
-      </div>
-    </mat-tab>
-  </mat-tab-group>
- 
-  
-
+        </div>
+      </mat-tab>
+    </mat-tab-group>
+    <mat-form-field matTooltip="Here you can change your color theme" style="font-size: 0.5rem; font-style: italic;">
+      <mat-label>Select your color theme</mat-label>
+      <mat-select [(ngModel)]="currentTheme" small>
+        <mat-option *ngFor="let theme of themes; let i = index" [value]="theme">
+          {{theme}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
 </div>

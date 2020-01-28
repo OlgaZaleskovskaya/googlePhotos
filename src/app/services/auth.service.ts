@@ -22,7 +22,6 @@ export class AuthService {
             this.credentials = { ... this.credentials, ...val };
         });
         this.accessToken = this.credentials['access_token'];
-      //  console.log('access token', this.accessToken );
         localStorage.setItem('accessToken', this.accessToken);
         return this.credentials['access_token'];
     }
@@ -32,10 +31,8 @@ export class AuthService {
         const CB_URL = 'http://localhost:4200/main';
         const scope = 'https://www.googleapis.com/auth/photoslibrary';
         var oauth2Endpoint = 'https://accounts.google.com/o/oauth2/v2/auth';
-
-        // Create <form> element to submit parameters to OAuth 2.0 endpoint.
         var form = document.createElement('form');
-        form.setAttribute('method', 'GET'); // Send as a GET request.
+        form.setAttribute('method', 'GET'); 
         form.setAttribute('action', oauth2Endpoint);
         var params = {
             'client_id': MY_KEY,

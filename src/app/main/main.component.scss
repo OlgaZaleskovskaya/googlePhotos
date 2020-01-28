@@ -1,9 +1,16 @@
 .container{
   width: 100%;
   margin: auto;
-    mat-tab-group{
-        width:95%;
-        margin: auto;
-        
+   
+}
+.my-flex{
+  display:flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+   mat-tab-group{
+        flex-basis: 85%;    
+    }
+    mat-form-field {
+      flex-basis: 10%;  
     }
 }

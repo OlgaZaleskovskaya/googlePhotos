@@ -1,16 +1,13 @@
 import { Injectable } from '@angular/core';
-import { HttpHeaders, HttpClient,  } from '@angular/common/http';
+import { HttpHeaders, HttpClient, } from '@angular/common/http';
 import { Observable, from } from 'rxjs';
-import { AuthService } from './auth.service';
-import { concatMap, catchError,  map, mergeMap, toArray } from 'rxjs/operators';
+import { concatMap, map, mergeMap, toArray } from 'rxjs/operators';
 import { IImgObject } from '../shared/model';
 
 @Injectable()
-
 export class HttpService {
     accessToken: string;
-    constructor(private http: HttpClient, private auth: AuthService) {
-
+    constructor(private http: HttpClient) {
     }
 
     getAlbums(token: string): Observable<any> {
@@ -23,9 +20,6 @@ export class HttpService {
             })
         };
         return this.http.get(URL, httpOptions);
-        // .pipe(
-        //     catchError(this.handleError)
-        // );
     }
 
     getAlbumContent(id: string): Observable<any> {
@@ -42,13 +36,10 @@ export class HttpService {
             "albumId": id
         };
         return this.http.post<Object>(URL, body, httpOptions);
-        // .pipe(
-        //   catchError(console.log("this.handleError"))
-        // );
     }
 
     addFiles(files: IImgObject[], albId: string) {
-     return   from(files).pipe(
+        return from(files).pipe(
             concatMap(res => this.getImgStr(res.file).pipe(map(res1 => {
                 const BODY = {
                     "description": res.description,
@@ -62,8 +53,8 @@ export class HttpService {
             , toArray()
             , mergeMap(res3 => this.addImages(res3, albId))
         );
-     //   .subscribe(res => console.log('onAddFiles')
-     //   );
+        //   .subscribe(res => console.log('onAddFiles')
+        //   );
 
     }
 
@@ -122,6 +113,6 @@ export class HttpService {
         return this.http.post(URL, BODY, httpOptions);
     }
 
-    
+
 
 }

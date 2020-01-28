@@ -3,7 +3,6 @@
             matTooltip="Create new Album">
             create
         </i></button>
-
     <form #myAddImageForm="ngForm" (ngSubmit)="onAddImage(myAddImageForm)">
         <mat-grid-list cols="5" rowHeight="40px">
             <!--  select album -->
@@ -22,7 +21,7 @@
             </mat-grid-tile>
             <!-- end select album -->
 
-            <mat-grid-tile [colspan]="2" [rowspan]="1" >
+            <mat-grid-tile [colspan]="2" [rowspan]="1">
                 <p>Selected files:</p>
             </mat-grid-tile>
 
@@ -33,8 +32,8 @@
                         <div class="form-control selectFiles" @myAnimation>
                             <div class="form-group ">
                                 <!-- 'just' select button-->
-                                <input type="file" accept = "image/*" (change)="onFileSelected($event)" name="myFile" class="form-control"
-                                    id="name" style="display: none" #fileInput>
+                                <input type="file" accept="image/*" (change)="onFileSelected($event)" name="myFile"
+                                    class="form-control" id="name" style="display: none" #fileInput>
                                 <button type="button" mat-button color="primary"
                                     (click)="fileInput.click()"><span>Select
                                         files</span></button>
@@ -46,7 +45,7 @@
                                 <!-- drag and drop img to  the album -->
                                 <div class="uploadfilecontainer " (click)="fileDrop.click()" appDnd
                                     (onFileDropped)="onDragFile($event)">
-                                    <span>  drag and drop files to the album</span>  
+                                    <span> drag and drop files to the album</span>
                                     <input hidden type="file" #fileDrop (change)="onDragFile($event)">
                                 </div>
                             </div><!-- end drag and drop img to  the album -->
@@ -61,8 +60,8 @@
                 <div>
                     <p *ngFor="let img of imgList; let i= index" [class.isSelected]="i == currentImgIndex"><span
                             style="width: 70%;">{{ img.name }}
-                        </span><span><i (click)="onEditImg(i)"
-                                matTooltip="Add Description and Name" class="material-icons">
+                        </span><span><i (click)="onEditImg(i)" matTooltip="Add Description and Name"
+                                class="material-icons">
                                 edit
                             </i> <i class="material-icons del" (click)="onDeleteAttachment(i)" matTooltip="Remove">
                                 delete
@@ -72,10 +71,9 @@
             </mat-grid-tile>
 
         </mat-grid-list>
-        <div class="btn-group"    *ngIf = "imgList.length > 0">
+        <div class="btn-group" *ngIf="imgList.length > 0">
             <button mat-raised-button color="primary" type="submit">Add</button>
             <button mat-raised-button color="warn" type="buttom">Clean</button></div>
 
     </form>
 </div>
-

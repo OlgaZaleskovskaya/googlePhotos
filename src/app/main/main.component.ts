@@ -31,7 +31,7 @@ export class MainComponent implements OnInit, OnDestroy {
     const token = this.auth.fetchAccessToken(route);
     this.subscription = this.albService.getAlbums(token).subscribe();
     this.router.navigate(['./main']);
-    this.themes = ['default-theme','pink-dark-theme', 'green-light-theme'];
+    this.themes = ['default-theme', 'green-light-theme'];
   
     this.currentTheme = this.themes[0];
   }

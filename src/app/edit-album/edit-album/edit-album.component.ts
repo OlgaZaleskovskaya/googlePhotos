@@ -8,15 +8,12 @@ import { ComponentType } from '@angular/cdk/portal';
 
 import {
   trigger,
-  state,
   style,
   animate,
   transition,
-  // ..
 } from '@angular/animations';
 import { EditImgComponent } from '../edit-img/edit-img.component';
 import { NewAlbumComponent } from '../new-album/new-album.component';
-
 import { NotificationService } from 'src/app/services/notification.service';
 import { SpinnerComponent } from 'src/app/albums/spinner/spinner.component';
 
@@ -104,7 +101,7 @@ export class EditAlbumComponent<T> implements OnInit {
       }
       this.imgList.push(imgObject);
     } else {
-     alert('Selected file format of file size is not supported');
+     alert('Selected file format or file size is not supported');
     }
   }
 
