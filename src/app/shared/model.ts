@@ -4,7 +4,7 @@ export interface IAlbum {
     productUrl: string,
     coverPhotoBaseUrl: string,
     coverPhotoMediaItemId: string,
-    isWriteable: string,
+    isWriteable: boolean,
     mediaItemsCount: number
 }
 export interface IPhoto {
@@ -36,4 +36,9 @@ export interface IContentOptions {
     width: number;
     pointerX: number;
     class: boolean
+}
+
+export interface ITheme {
+    colorTheme: number;
+    colorClass: number;
 }

@@ -1,9 +1,9 @@
 /* You can add global styles to this file, and also import other style files */
-@import "scss/custom";
+//@import "scss/custom";
 //Here we importing _custom.scss file but we don't need to include underscore.
 //$theme:   mat-light-theme($primary,$accent,$warn);
 //@include angular-material-theme($theme);
-@import "src/my-theme";
+
 
 @mixin boxShadow($left, $top, $radius, $color) {
 	box-shadow: $left $top $radius $color;
@@ -34,5 +34,6 @@
 		box-shadow: none;
 		
 	}
-		
+
+
 	

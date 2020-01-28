@@ -27,7 +27,8 @@ export class AlbumsComponent implements OnInit, OnDestroy {
     this.albumsList = this.albumsService.albumList;
     this.subscription = this.albumsService.albums
       .subscribe(res => {this.albumsList = res;
-      this.isLoading = false})
+      this.isLoading = false});
+     
   }
 
   ngOnDestroy(): void {

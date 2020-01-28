@@ -4,7 +4,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import 'hammerjs';
-import { ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { MainComponent } from './main/main.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
@@ -34,7 +34,7 @@ import { InterceptorService } from './services/interceptor.service';
     InitialComponent,
     AlbumsComponent,
     TempoComponent,
-    SpinnerComponent,
+    SpinnerComponent
    
    
   ],
@@ -46,6 +46,7 @@ import { InterceptorService } from './services/interceptor.service';
     BrowserAnimationsModule,
     MaterialModule,
     AppRoutingModule,
+    FormsModule
   ],
   providers: [AlbumsService, AuthService, DatePipe, HttpService, {
     provide: HTTP_INTERCEPTORS,

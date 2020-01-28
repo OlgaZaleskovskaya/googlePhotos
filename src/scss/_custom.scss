@@ -1,5 +1,36 @@
 @import '~@angular/material/theming';
 @include mat-core();
-$primary: mat-palette($mat-grey);
-$accent:  mat-palette($mat-light-blue, 600, 300, 600);
-$warn:    mat-palette($mat-deep-orange, 300, 500, 800);
+
+$primary: mat-palette($mat-indigo, 700, 300, 900);
+$accent:  mat-palette($mat-light-blue);
+$warn:    mat-palette($mat-deep-orange);
+
+$my-default-theme: mat-light-theme(
+  $primary,
+  $accent,
+  $warn
+);
+
+$my-first-primary: mat-palette($mat-cyan);
+$my-first-accent:  mat-palette($mat-teal, 600, 300, 600);
+$my-first-warn:    mat-palette($mat-red, 300, 500, 800);
+
+$my-first-theme: mat-light-theme(
+  $my-first-primary,
+  $my-first-accent,
+  $my-first-warn
+);
+
+
+
+$my-second-primary: mat-palette($mat-pink);
+$my-second-accent:  mat-palette($mat-green, 600, 300, 600);
+$my-second-warn:    mat-palette($mat-deep-orange, 300, 500, 800);
+
+$my-second-theme: mat-dark-theme(
+  $my-second-primary,
+  $my-second-accent,
+  $my-second-warn
+);
+
+

@@ -22,6 +22,8 @@ export class AuthService {
             this.credentials = { ... this.credentials, ...val };
         });
         this.accessToken = this.credentials['access_token'];
+      //  console.log('access token', this.accessToken );
+        localStorage.setItem('accessToken', this.accessToken);
         return this.credentials['access_token'];
     }
 

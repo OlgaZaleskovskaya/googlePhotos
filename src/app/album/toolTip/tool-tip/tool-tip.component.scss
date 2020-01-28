@@ -12,33 +12,32 @@
                 width: 1em;
                 transform: rotate(45deg);
                 position:relative;
-                top:3px;
+                top:-5px;
                 background: rgb(11, 59, 104);
             }
         }
         .message{
             position: relative;
             top:-0.5em;
-            background: rgb(11, 59, 104);
+            background: rgb(73, 149, 221);
             color: white;
             z-index: 2; 
-            font-size: 0.8em;
-           font-weight: 100;
            @include boxShadow(2px, 2px, 2px, black);
            @include borderRadius(5px);
-           padding:1em;
-        
+           padding: 0 0.5em;
            height: auto;
             table{
+                background: yellow;
                 width: 100%;
-                border: 1px solid grey;
                 border-collapse: collapse;
+                position: relative;
+                top: -0.5em;
                 tr{
                     td{
-                        font-size: 0.8em;
-                        font-weight: 100;
+                        font-size: 0.5em;
+                        font-weight: lighter;
                         padding: 0.5em 2em;
-                        border: 1px solid grey;
+                        border: 1px solid rgb(230, 114, 114);
                         vertical-align: top;
                     }
                     td:first-child{
@@ -46,15 +45,14 @@
                     }
                 }
             }
-        }
-       
-      
+        }  
  }    
  div.transition{
     transform: translateY(-100%);
     div.outer{
        div.inner {
            margin-top:-1em;
+
        }
     }
     div.message{

@@ -39,8 +39,6 @@ import { SpinnerComponent } from 'src/app/albums/spinner/spinner.component';
   ]
 })
 export class EditAlbumComponent<T> implements OnInit {
-  // currentName: string;
-  // currentId: string;
   currentImgIndex: number;
   currentImg: File;
   currentImgObject: IImgObject;
@@ -56,28 +54,12 @@ export class EditAlbumComponent<T> implements OnInit {
   newAlbum: boolean;
   isLoading: boolean;
   addDescription: boolean;
-
-
-
-  constructor(private router: Router,
-    private albService: AlbumsService, private dialog: MatDialog, private ns: NotificationService) {
-    // this.router.events
-    //   .subscribe(res => {
-    //     if (res['url']) {
-    //       this.getCurrentData(res['url']);
-    //     }
-    //   });
-    this.albService.subjOnUploadImgs.subscribe(res => {
-      if (res == "success") {
-
-      }
-    })
-  }
-
-
-  imagesForm = new FormGroup({
-
+ imagesForm = new FormGroup({
   });
+
+
+  constructor(private albService: AlbumsService, private dialog: MatDialog, private ns: NotificationService) {
+  }
 
   ngOnInit() {
     this.isLoading = false;
@@ -89,7 +71,6 @@ export class EditAlbumComponent<T> implements OnInit {
       if (res === "success") {
         this.ns.success(":: Images are upLoadeds");
         this.dialog.closeAll();
-
       } else {
         this.ns.notification(":: An error has occurred")
 
@@ -97,18 +78,11 @@ export class EditAlbumComponent<T> implements OnInit {
     });
   }
 
-  getCurrentData(str: string) {
-    // const nameIndex = str.indexOf('name');
-    // const nameEnd = str.indexOf('/', nameIndex);
-    // this.currentName = str.slice(nameIndex + 5, nameEnd);
-    // const t = str.indexOf('album/');
-    // this.currentId = str.slice(t + 6, nameIndex - 1);
-  }
 
   onDragFile(event) {
     for (let i = 0; i < event.length; i++) {
       if (!this.validateFile(event[i])) {
-        console.log("wrong format");
+        alert("wrong format");
         break;
       }
       const imgObject = <IImgObject>{
@@ -120,7 +94,7 @@ export class EditAlbumComponent<T> implements OnInit {
     }
   }
 
-  onFileSelected(event) {
+  public onFileSelected(event): void {
     const img = <File>event.target.files[0];
     if (this.validateFile(img)) {
       const imgObject = <IImgObject>{
@@ -130,22 +104,21 @@ export class EditAlbumComponent<T> implements OnInit {
       }
       this.imgList.push(imgObject);
     } else {
-      console.log('Selected file format is not supported');
-      return;
+     alert('Selected file format of file size is not supported');
     }
   }
 
-  onDeleteAttachment(index: number) {
+  public onDeleteAttachment(index: number): void {
     this.imgList.splice(index, 1)
   }
 
-  onAddImage(form: NgForm) {
+  public onAddImage(form: NgForm): void {
     const id = this.selectedAlbum.id;
     this.albService.addFiles(this.imgList, id);
     this.onSpinnerCreate(SpinnerComponent);
   }
 
-  onEditImg(index: number) {
+  public onEditImg(index: number): void {
     this.addDescription = true;
     this.currentImgIndex = index;
     this.currentImgObject = this.imgList[index];
@@ -154,32 +127,29 @@ export class EditAlbumComponent<T> implements OnInit {
   }
 
 
-  onCreateAlbum(form: NgForm) {
-    const name = form.controls['name'].value;
-    this.albService.createAlbum(name);
-  }
-
-  onNewAlbum() {
+ 
+  public onNewAlbum(): void {
     this.selectedAlbum = null;
     this.newAlbum = !this.newAlbum;
     this.onCreatePopUp(NewAlbumComponent, '60%');
   }
 
-  private onCreatePopUp<T>(dialogComponent: ComponentType<T>, width: string) {
+  private onCreatePopUp<T>(dialogComponent: ComponentType<T>, width: string): void {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
     dialogConfig.width = width.toString();
     var matDialogRef = this.dialog.open(dialogComponent, dialogConfig);
-    matDialogRef.afterClosed().subscribe(res => this.addDetails(res));
+    matDialogRef.afterClosed().subscribe(res => this.addDetails(res)
+    );
 
   }
 
-  private onSpinnerCreate<T>(dialogComponent: ComponentType<T>) {
+  private onSpinnerCreate<T>(dialogComponent: ComponentType<T>): void {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = true;
     dialogConfig.width = "100%";
-    dialogConfig.panelClass ='testClass' ;
+    dialogConfig.panelClass = 'testClass';
     let matDialogRef = this.dialog.open(dialogComponent, dialogConfig);
     this.albService.subjOnUploadImgs.subscribe(res => {
       if (res == "success") {
@@ -188,8 +158,8 @@ export class EditAlbumComponent<T> implements OnInit {
     })
   }
 
-  addDetails(res: string[] | any) {
-    if (res) {
+  private addDetails(res: string[] | any) {
+    if (Array.isArray(res) ) {
       this.imgList[this.currentImgIndex].name = res[0];
       if (res[1]) {
         this.imgList[this.currentImgIndex].description = res[1];
@@ -198,9 +168,18 @@ export class EditAlbumComponent<T> implements OnInit {
   }
 
   private validateFile(f: File): boolean {
-    var ext = f.name.substring(f.name.lastIndexOf('.') + 1);
-
-    if ((ext == 'png' || ext == 'jpg' || ext == 'gif') && f.size < 500000) {
+   const ext = f.name.substring(f.name.lastIndexOf('.') + 1).toLowerCase();
+    console.log('ext', ext);
+    console.log('size', f.size);
+    if ((ext == 'png' 
+    || ext == 'jpg' 
+    || ext == 'gif' 
+    || ext =='tiff' 
+    || ext =='bmp'
+    || ext =='heic'
+    || ext =='ico'
+    || ext =='webp'
+    ) && f.size < 7500000) {
       return true;
     } else {
       return false;

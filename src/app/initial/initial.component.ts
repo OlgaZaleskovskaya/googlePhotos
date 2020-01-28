@@ -20,6 +20,7 @@ import { trigger, state, style, transition, animate } from '@angular/animations'
 })
 export class InitialComponent implements OnInit {
   switch: boolean;
+
   constructor() { }
 
   ngOnInit() {

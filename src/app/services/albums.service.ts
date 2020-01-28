@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
 import { HttpService } from './http.service';
 import { map, tap } from 'rxjs/operators';
-import { Observable, Subject, throwError } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { DatePipe } from '@angular/common';
 import { IAlbum, IPhotoSize, IPhoto, IImgObject } from '../shared/model';
-import { HttpErrorResponse } from '@angular/common/http';
+import { AuthService } from './auth.service';
+
 
 
 
@@ -15,17 +16,17 @@ export class AlbumsService {
     albums = new Subject<Array<IAlbum>>();
     albumContent = new Subject<Array<IPhoto>>();
     initialPhotoSize = [500, 500];
-    // loadedImageSbj = new Subject<string>();
-    subjOnCreateAbum = new Subject<string>();
+    subjOnCreateAlbum = new Subject<string>();
+    subjOnAddAlbum = new Subject<Array<IAlbum>>();
     subjOnUploadImgs = new Subject<string>();
 
-    constructor(private http: HttpService, public datepipe: DatePipe) {
+    constructor(private http: HttpService, public datepipe: DatePipe, public auth: AuthService) {
 
     }
 
-    getAlbums(token: string): Observable<Array<IAlbum>> {
+    public getAlbums(token: string): Observable<Array<IAlbum>> {
         return this.http.getAlbums(token)
-            .pipe(tap(val => console.log(val)),
+            .pipe(
                 map(val => this.createAlbums(val)),
             );
     }
@@ -82,9 +83,9 @@ export class AlbumsService {
 
 
 
-    addFiles(files: IImgObject[], albId: string) {
-    
-        setTimeout(() => this.subjOnUploadImgs.next('success'), 100000);
+    public addFiles(files: IImgObject[], albId: string): void {
+
+        setTimeout(() => this.subjOnUploadImgs.next('success'), 2000);
         // this.http.addFiles(files, albId).subscribe(res => this.subjOnUploadImgs.next('success'), error => this.subjOnUploadImgs.next('error'));
         ;
 
@@ -92,24 +93,24 @@ export class AlbumsService {
 
 
 
-    private handleError(error: HttpErrorResponse) {
-        if (error.error instanceof ErrorEvent) {
-            // A client-side or network error occurred. Handle it accordingly.
-            console.error('An error occurred:', error.error.message);
-        } else {
-            // The backend returned an unsuccessful response code.
-            // The response body may contain clues as to what went wrong,
-            console.error(
-                `Backend returned code ${error.status}, ` +
-                `body was: ${error.error}`);
-        }
-        // return an observable with a user-facing error message
-        return throwError(
-            'Something bad happened; please try again later.');
-    };
 
-    createAlbum(name: string): void {
+
+    public createNewAlbum(name: string): void {
         this.http.createAlbum(name)
-            .subscribe(res => this.subjOnCreateAbum.next('success'), error => this.subjOnCreateAbum.next('error'));
+            .subscribe(res => {
+                const alb = {id: res.id,
+                title: res.title,
+                productUrl: null,
+                coverPhotoBaseUrl: null,
+                coverPhotoMediaItemId: null,
+                isWriteable: true,
+                mediaItemsCount: 0};
+                this.subjOnCreateAlbum.next('success');
+               // const token = localStorage.getItem('accessToken');
+                console.log('album', res);
+                // this.getAlbums(token).subscribe(res => {
+                //     this.subjOnAddAlbum.next(res);
+                // });
+            }, error => this.subjOnCreateAlbum.next('error'));
     }
 }

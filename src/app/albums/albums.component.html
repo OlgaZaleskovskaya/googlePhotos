@@ -1,7 +1,7 @@
 <div class="albums">
-  <mat-spinner class="spinner" color="accent" *ngIf="isLoading"></mat-spinner>
-  <mat-card class="example-card" *ngFor="let album of albumsList">
-    <mat-card-header>
+  <mat-spinner class="spinner" color="accent" *ngIf="isLoading && albumsList"></mat-spinner>
+  <mat-card class="example-card" *ngFor="let album of albumsList"> 
+    <mat-card-header color="primary">
       <mat-card-title>{{album.title}}</mat-card-title>
     </mat-card-header>
     <img mat-card-image src={{album.coverPhotoBaseUrl}} alt="Photo of a Shiba Inu">
@@ -11,7 +11,7 @@
       </p>
     </mat-card-content>
     <mat-card-actions>
-      <button type="button" [disabled]="!album.mediaItemsCount" mat-button
+      <button type="button" [disabled]="!album.mediaItemsCount" mat-button color = "accent"
         (click)="selectAlbum(album.id, album.title)">Get Photos</button>
     </mat-card-actions>.
   </mat-card>

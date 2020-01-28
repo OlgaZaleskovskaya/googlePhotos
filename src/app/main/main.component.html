@@ -1,5 +1,15 @@
-<div class="container">
-    <i class="material-icons orange600">face</i>
+<mat-form-field style = "font-size: 0.5rem; font-style: italic;">
+    <mat-label>Select your color theme</mat-label>
+    <mat-select [(ngModel)] = "currentTheme" small>
+      <mat-option *ngFor="let theme of themes; let i = index" [value]="theme">
+        {{theme}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+ 
+
+<div class="container" [class]="currentTheme">
+   
   <mat-tab-group dynamicHeight (selectedTabChange)="myMethod($event)">
     <mat-tab label="Albums">
       <div class="example-small-box mat-elevation-z4">
@@ -10,10 +20,13 @@
         </div>
       </div>
     </mat-tab>
-    <mat-tab label="Edit Album" (selectedTabChange)="myMethod($event)">
+    <mat-tab label="Add images" (selectedTabChange)="myMethod($event)">
       <div class="example-small-box mat-elevation-z4">
           <router-outlet name="editAlbum"></router-outlet>
       </div>
     </mat-tab>
   </mat-tab-group>
+ 
+  
+
 </div>

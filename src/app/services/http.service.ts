@@ -22,9 +22,10 @@ export class HttpService {
                 'Authorization': 'Bearer ' + token
             })
         };
-        return this.http.get(URL, httpOptions).pipe(
-            catchError(this.handleError)
-        );
+        return this.http.get(URL, httpOptions);
+        // .pipe(
+        //     catchError(this.handleError)
+        // );
     }
 
     getAlbumContent(id: string): Observable<any> {
@@ -40,9 +41,10 @@ export class HttpService {
             "pageSize": "100",
             "albumId": id
         };
-        return this.http.post<Object>(URL, body, httpOptions).pipe(
-            catchError(this.handleError)
-        );
+        return this.http.post<Object>(URL, body, httpOptions);
+        // .pipe(
+        //   catchError(console.log("this.handleError"))
+        // );
     }
 
     addFiles(files: IImgObject[], albId: string) {

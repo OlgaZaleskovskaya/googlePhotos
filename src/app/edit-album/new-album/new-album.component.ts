@@ -18,7 +18,7 @@ export class NewAlbumComponent implements OnInit {
 
   ngOnInit() {
   
-    this.albService.subjOnCreateAbum.subscribe(res => {
+    this.albService.subjOnCreateAlbum.subscribe(res => {
       if (res === "success") {
         this.ns.success(":: Album is created");
       } else {
@@ -35,7 +35,7 @@ export class NewAlbumComponent implements OnInit {
 
   onSubmit() {
     const alb = this.myForm.controls['name'].value;
-    this.albService.createAlbum(alb);
+    this.albService.createNewAlbum(alb);
     this.onClose(alb);
   }
 
