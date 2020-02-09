@@ -12,7 +12,7 @@ export class DndDirective {
   }
   @Output() onFileDropped = new EventEmitter<any>();
 
-  @HostBinding('style.background-color') private background = '#f5fcff'
+  @HostBinding('style.background-color') background = '#f5fcff'
 
 
   @HostListener('mouseenter') onMouseEnter() {
